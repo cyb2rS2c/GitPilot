@@ -5,4 +5,4 @@ cd GitPilot-main/GitPilot-main
 python -m venv myvenv
 ./myvenv/Scripts/Activate.ps1
 pip install -r requirements.txt
-python gitpilot.py
+Write-Host "Please execute the following command: 'python gitpilot.py' using a python interpreter to avoid any errors"
