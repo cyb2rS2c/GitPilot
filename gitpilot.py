@@ -9,6 +9,9 @@ from io import BytesIO
 from urllib.request import urlopen
 from colorama import init, Fore, Style
 from pyfiglet import Figlet
+import readchar
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # Initialize color output for all platforms
 init(autoreset=True)
@@ -16,8 +19,7 @@ init(autoreset=True)
 # CONFIGURATION
 USERNAME = "cyb2rS2c"
 TITLE = "GitPilot"
-DESCRIPTION = "Your autopilot for GitHub repositories - clone, install, and run with a single command."
-
+DESCRIPTION = "Your autopilot for GitHub repositories - clone, install, and run with a single command.\nDesigned and built by **[@cyb2rS2c](https://github.com/cyb2rS2c)**"
 
 # ────────────────────────────────────────────────────────────────
 # Utility Functions
@@ -34,6 +36,7 @@ def print_header():
     print(Fore.RED + fig.renderText(TITLE))
     print(Fore.YELLOW + DESCRIPTION + "\n" + Style.RESET_ALL)
 
+
 def get_system():
     """Returns the current operating system name."""
     return "Windows" if platform.system().lower().startswith("win") else "Linux"
@@ -44,10 +47,6 @@ def get_system():
 # ────────────────────────────────────────────────────────────────
 
 def detect_supported_systems(readme_text: str):
-    """
-    Analyze README contents to infer OS support based on install commands.
-    Returns a list of supported systems.
-    """
     text = re.sub(r'\s+', ' ', readme_text.lower())
     git_found = bool(re.search(r"(sudo\s+)?git\s+clone", text))
     curl_found = bool(re.search(r"curl\s+-", text))
@@ -62,7 +61,6 @@ def detect_supported_systems(readme_text: str):
 
 
 def fetch_user_repositories(username: str):
-    """Fetch all public GitHub repositories for a user."""
     api_url = f"https://api.github.com/users/{username}/repos"
     repos, page = [], 1
 
@@ -104,7 +102,6 @@ def fetch_user_repositories(username: str):
 # ────────────────────────────────────────────────────────────────
 
 def interactive_menu(repos, system):
-    """Interactive terminal selection interface."""
     index = 0
     compatible_repos = [r for r in repos if system in r[1] or len(r[1]) == 2]
 
@@ -114,46 +111,24 @@ def interactive_menu(repos, system):
     while True:
         print_header()
         print(Fore.GREEN + f"Detected System: {system}\n" + Style.RESET_ALL)
-        print("Use [up]/[down] arrow to navigate, [Enter] to select, or 'q' to quit.\n")
+        print("Use UP/DOWN to navigate, [Enter] to select, or 'q' to quit.\n")
 
         for i, (name, systems) in enumerate(compatible_repos):
             label = f"{name} ({'/'.join(systems)})"
-            pointer = Fore.CYAN + "-> " + Fore.MAGENTA if i == index else "  "
+            pointer = Fore.RED + "* " + Fore.MAGENTA if i == index else "  "
             print(pointer + label + Style.RESET_ALL)
 
-        # Handle keyboard input
-        if os.name == "nt":
-            import msvcrt
-            key = msvcrt.getch()
-            if key == b'\xe0':  # arrow key prefix
-                key = msvcrt.getch()
-                if key == b'H':  # up
-                    index = (index - 1) % len(compatible_repos)
-                elif key == b'P':  # down
-                    index = (index + 1) % len(compatible_repos)
-            elif key == b'\r':  # enter
-                return compatible_repos[index][0]
-            elif key.lower() == b'q':
-                clear_screen()
-                sys.exit(0)
-        else:
-            import termios, tty
-            fd = sys.stdin.fileno()
-            old_settings = termios.tcgetattr(fd)
-            try:
-                tty.setraw(fd)
-                key = sys.stdin.read(3)
-            finally:
-                termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        key = readchar.readkey()
 
-            if key == '\x1b[A':
-                index = (index - 1) % len(compatible_repos)
-            elif key == '\x1b[B':
-                index = (index + 1) % len(compatible_repos)
-            elif key == '\r':
-                return compatible_repos[index][0]
-            elif key == 'q':
-                sys.exit(0)
+        if key == readchar.key.UP:
+            index = (index - 1) % len(compatible_repos)
+        elif key == readchar.key.DOWN:
+            index = (index + 1) % len(compatible_repos)
+        elif key == readchar.key.ENTER:
+            return compatible_repos[index][0]
+        elif key.lower() == 'q':
+            clear_screen()
+            sys.exit(0)
 
 
 # ────────────────────────────────────────────────────────────────
@@ -161,7 +136,6 @@ def interactive_menu(repos, system):
 # ────────────────────────────────────────────────────────────────
 
 def clone_or_download(repo_url: str):
-    """Clone repo via git or download a ZIP if git is unavailable."""
     repo_name = repo_url.rstrip("/").split("/")[-1].replace(".git", "")
 
     try:
@@ -194,7 +168,6 @@ def clone_or_download(repo_url: str):
 # ────────────────────────────────────────────────────────────────
 
 def install_dependencies():
-    """Find and install dependencies from requirements.txt."""
     for root, _, files in os.walk("."):
         for f in files:
             if f.lower() == "requirements.txt":
@@ -211,7 +184,6 @@ def install_dependencies():
 # ────────────────────────────────────────────────────────────────
 
 def find_runnable_files(system):
-    """Return runnable file paths based on OS."""
     runnable = []
     for root, _, files in os.walk("."):
         for f in files:
@@ -224,7 +196,6 @@ def find_runnable_files(system):
 
 
 def run_selected_repo(repo_name):
-    """Handles full repo setup and execution."""
     repo_url = f"https://github.com/{USERNAME}/{repo_name}.git"
     system = get_system()
 
@@ -242,7 +213,6 @@ def run_selected_repo(repo_name):
         print(Fore.RED + "No runnable scripts found. Check the README.md for usage details.\n")
         return
 
-    # Handle multiple runnable scripts
     if len(runnable_files) > 1:
         print(Fore.YELLOW + "Multiple runnable files found:\n")
         for i, f in enumerate(runnable_files, start=1):
