@@ -4,4 +4,4 @@ cd GitPilot-main/GitPilot-main
 python -m venv myvenv
 ./myvenv/Scripts/Activate.ps1
 pip install -r requirements.txt
-python GitPilot.py
+python gitpilot.py
