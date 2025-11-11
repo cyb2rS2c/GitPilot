@@ -118,7 +118,7 @@ def interactive_menu(repos, system):
 
         for i, (name, systems) in enumerate(compatible_repos):
             label = f"{name} ({'/'.join(systems)})"
-            pointer = Fore.CYAN + "→ " + Fore.MAGENTA if i == index else "  "
+            pointer = Fore.CYAN + "-> " + Fore.MAGENTA if i == index else "  "
             print(pointer + label + Style.RESET_ALL)
 
         # Handle keyboard input
