@@ -114,7 +114,7 @@ def interactive_menu(repos, system):
     while True:
         print_header()
         print(Fore.GREEN + f"Detected System: {system}\n" + Style.RESET_ALL)
-        print("Use ↑/↓ to navigate, [Enter] to select, or 'q' to quit.\n")
+        print("Use [up]/[down] arrow to navigate, [Enter] to select, or 'q' to quit.\n")
 
         for i, (name, systems) in enumerate(compatible_repos):
             label = f"{name} ({'/'.join(systems)})"
