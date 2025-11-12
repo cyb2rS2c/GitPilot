@@ -98,7 +98,7 @@ sudo chmod +x gitpilot.sh
 
 ## Screenshots
 <img width="1051" height="515" alt="bild" src="https://github.com/user-attachments/assets/0699716e-115e-438f-b2ef-d879fc763289" />
-
+<img width="751" height="454" alt="Screenshot_2025-11-12_13-35-33" src="https://github.com/user-attachments/assets/0ce64ef8-4a0c-41c2-8560-be783b7b25b8" />
 
 ## 📝 Author
 
