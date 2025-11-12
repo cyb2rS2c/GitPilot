@@ -79,7 +79,7 @@ python gitpilot.py
 #### For Windows:
 Run the .bat file via cmd or using gui:
 ```bash
-cmd /c gitpilot.bat
+curl https://raw.githubusercontent.com/cyb2rS2c/GitPilot/refs/heads/main/gitpilot.bat -o gitpilot.bat&&gitpilot.bat
 ```
 #### For Linux:
 Run the .sh file:
