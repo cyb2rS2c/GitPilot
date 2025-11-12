@@ -53,10 +53,10 @@ curl -o GitPilot-main.zip https://github.com/cyb2rS2c/GitPilot/archive/refs/head
 Expand-Archive -Force  .\GitPilot-main.zip
 cd GitPilot-main/GitPilot-main
 ```
-2. Install dependencies in venv using powershell (Recommended):
+2. Install dependencies in venv using cmd (Recommended):
 ```bash
 python -m venv myvenv
-./myvenv/Scripts/Activate.ps1
+./myvenv/Scripts/activate.bat
 pip install -r requirements.txt
 ```
 1. Clone this repository: (Linux):
@@ -97,7 +97,8 @@ sudo chmod +x gitpilot.sh
 6. Finally, it runs any runnable files found in the repo.
 
 ## Screenshots
-<img width="837" height="472" alt="bild" src="https://github.com/user-attachments/assets/6359d1b5-d989-4e48-85e4-8ab25013f5b3" />
+<img width="1051" height="515" alt="bild" src="https://github.com/user-attachments/assets/0699716e-115e-438f-b2ef-d879fc763289" />
+
 
 ## 📝 Author
 
