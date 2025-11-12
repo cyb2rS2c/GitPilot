@@ -84,8 +84,7 @@ cmd /c gitpilot.bat
 #### For Linux:
 Run the .sh file:
 ```bash
-sudo chmod +x gitpilot.sh
-./gitpilot.sh
+wget https://raw.githubusercontent.com/cyb2rS2c/GitPilot/refs/heads/main/gitpilot.sh;sudo chmod +x gitpilot.sh;./gitpilot.sh
 ```
 ## Interactive Flow
 
