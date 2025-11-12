@@ -7,4 +7,4 @@ python3 -m venv myvenv
 source myvenv/bin/activate
 python3 -m pip install --upgrade pip
 pip install -r requirements.txt
-python3 -i -c "exec(open('gitpilot.py').read())"
+python3 gitpilot.py
