@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-green?logo=linux)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-2.0-orange)
+![Version](https://img.shields.io/badge/Version-3.0-orange)
 
 ---
 
@@ -21,7 +21,7 @@ It’s an interactive assistant that:
 - 🚀 Detects and executes runnable files (`.py`, `.sh`, `.ps1`, `.bat`)  
 
 > Designed and built by **[@cyb2rS2c](https://github.com/cyb2rS2c)**  
-> Version: **2.0**
+> Version: **3.0**
 
 ---
 
@@ -77,12 +77,12 @@ python gitpilot.py
 ```
 ### Advanced Installer (Skip the steps above)
 #### For Windows:
-Run the .bat file via cmd or using gui:
+Run the .bat file via CMD or using GUI:
 ```bash
 curl https://raw.githubusercontent.com/cyb2rS2c/GitPilot/refs/heads/main/gitpilot.bat -o gitpilot.bat&&gitpilot.bat
 ```
 #### For Linux:
-Run the .sh file:
+Run the .sh file using Terminal:
 ```bash
 wget https://raw.githubusercontent.com/cyb2rS2c/GitPilot/refs/heads/main/gitpilot.sh;sudo chmod +x gitpilot.sh;./gitpilot.sh
 ```
