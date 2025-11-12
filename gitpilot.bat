@@ -7,4 +7,4 @@ python -m venv myvenv
 call myvenv\Scripts\activate.bat
 python -m pip install --upgrade pip
 pip install -r requirements.txt
-cmd /k "myvenv\Scripts\python.exe -i -c ""exec(open('gitpilot.py').read())"""
+cmd /k "myvenv\Scripts\python.exe gitpilot.py"
